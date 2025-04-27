@@ -5,14 +5,29 @@ import { useEffect, useState } from "react";
 export default function LocationFinderClient() {
   const [locationInfo, setLocationInfo] = useState({ city: "" });
 
+  const getLocationInfo = async () => {
+    try {
+      const response = await fetch("https://ap-ip.cc/json");
+      const locationData = await response.json();
+      console.log(locationData);
+      setLocationInfo(locationData);
+    } catch (err) {
+      console.error("Failed to fetch location:", err);
+    }
+  };
+
   useEffect(() => {
-    fetch("http://ip-api.com/json")
-      .then((r) => r.json())
-      .then(setLocationInfo)
-      .catch(console.error);
+    getLocationInfo();
   }, []);
 
   return (
     <h1>Hello from {locationInfo.city} -- client</h1>
   );
 }
+
+
+
+
+ 
+
+  
