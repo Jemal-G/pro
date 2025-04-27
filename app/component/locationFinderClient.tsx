@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function LocationFinderClient() {
-  const [locationInfo, setLocationInfo] = useState({city:"not found"});
+  const [locationInfo, setLocationInfo] = useState({ city: "" });
 
   const getLocationInfo = async () => {
     try {
@@ -22,7 +22,7 @@ export default function LocationFinderClient() {
 
   return (
     <>
-      <h1>Hello from {locationInfo?.city} client component</h1>
+      <h1>Hello from {locationInfo.city} client component</h1>
     </>
   );
 }
