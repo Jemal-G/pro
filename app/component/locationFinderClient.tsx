@@ -6,7 +6,7 @@ export default function LocationFinderClient() {
   const [locationInfo, setLocationInfo] = useState({ city: "" });
 
   useEffect(() => {
-    fetch("https://ipinfo.io/json")
+    fetch("http://ip-api.com/json")
       .then((r) => r.json())
       .then(setLocationInfo)
       .catch(console.error);
