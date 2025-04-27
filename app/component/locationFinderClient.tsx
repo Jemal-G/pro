@@ -1,33 +1,31 @@
 "use client";
-
 import { useEffect, useState } from "react";
 
 export default function LocationFinderClient() {
-  const [locationInfo, setLocationInfo] = useState({ city: "" });
-
-  const getLocationInfo = async () => {
-    try {
-      const response = await fetch("http://ip-api.com/json");
-      const locationData = await response.json();
-      console.log(locationData);
-      setLocationInfo(locationData);
-    } catch (err) {
-      console.error("Failed to fetch location:", err);
-    }
-  };
+  const [city, setCity] = useState<string | null>(null);
 
   useEffect(() => {
-    getLocationInfo();
+    if (!navigator.geolocation) {
+      console.error("Geolocation not supported");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+        );
+        const data = await res.json();
+        setCity(data.address.city || data.address.town || data.address.village);
+      },
+      (err) => console.error("Geolocation error:", err),
+      { enableHighAccuracy: true }
+    );
   }, []);
 
   return (
-    <h1>Hello from {locationInfo.city} -- client</h1>
+    <h1>
+      Hello from {city ?? "loading location"} client component
+    </h1>
   );
 }
-
-
-
-
- 
-
-  
