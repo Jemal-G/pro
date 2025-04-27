@@ -25,7 +25,7 @@ export default function LocationFinderClient() {
 
   return (
     <h1>
-      Hello from {city ?? "loading location"} client component
+      Hello from {city ?? "loading location"} -- client 
     </h1>
   );
 }
