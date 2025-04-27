@@ -13,7 +13,7 @@ export default async function LocationFinderClient() {
 
 return (
   <>
-    <h1>Hello from {locationInfo?.city } server component</h1>
+    <h1>Hello from {locationInfo?.city } --server </h1>
   </>
 );
 }
