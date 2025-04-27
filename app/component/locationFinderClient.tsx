@@ -7,7 +7,7 @@ export default function LocationFinderClient() {
 
   const getLocationInfo = async () => {
     try {
-      const response = await fetch("https://ap-ip.cc/json");
+      const response = await fetch("http://ip-api.com/json");
       const locationData = await response.json();
       console.log(locationData);
       setLocationInfo(locationData);
